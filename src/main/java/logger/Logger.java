@@ -1,7 +1,7 @@
 package logger;
 
 public class Logger {
-    private static final String MESSAGE_TEMPLATE = "%s::%s";
+    private static final String MESSAGE_TEMPLATE = "%s:: %s";
 
     private int lineNumber = 1;
 

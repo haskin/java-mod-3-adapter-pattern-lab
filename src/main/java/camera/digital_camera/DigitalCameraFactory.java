@@ -25,9 +25,9 @@ public class DigitalCameraFactory {
 
     public static DigitalCameraAdapter makeCamera(CameraFactory.CameraManufacturer manufacturer) {
         if (manufacturer == CameraFactory.CameraManufacturer.NIKON_FILM) {
-            return new NikonDigitalCamera(new NikonCamera(new NikonFilm(), new NikonShutter(), new NikonMirror()));
+            return new NikonDigitalCamera(new NikonCamera(new NikonFilm(), new NikonShutter(), new NikonMirror()), new SdCard());
         } else if (manufacturer == CameraFactory.CameraManufacturer.CANON_FILM) {
-            return new CanonDigitalCamera(new CanonCamera(new CanonFilm(), new CanonShutter(), new CanonMirror()));
+            return new CanonDigitalCamera(new CanonCamera(new CanonFilm(), new CanonShutter(), new CanonMirror()), new SdCard());
 
         }
 

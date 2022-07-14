@@ -5,27 +5,29 @@ import logger.Logger;
 
 public class NikonDigitalCamera implements DigitalCameraAdapter{
     private final Camera traditionalCamera;
+    private final MemoryCard memoryCard;
 
-    public NikonDigitalCamera(Camera traditionalCamera) {
+    public NikonDigitalCamera(Camera traditionalCamera, MemoryCard memoryCard) {
         this.traditionalCamera = traditionalCamera;
+        this.memoryCard = memoryCard;
     }
 
     @Override
     public void takePhotograph(double shutterSpeed) {
         Logger.getInstance().log(getName() + " is taking a photograph");
 
-        this.traditionalCamera.getFilmOps().engageFilmMechanism();
-        this.traditionalCamera.getFilmOps().rollFilm();
-        this.traditionalCamera.getFilmOps().releaseFilmMechanism();
+        memoryCard.accessMemory();
 
-        this.traditionalCamera.getMirrorOps().openMirror();
+        traditionalCamera.getMirrorOps().openMirror();
 
-        this.traditionalCamera.getShutterOps().setShutterSpeedSetting(shutterSpeed);
-        this.traditionalCamera.getShutterOps().initializeShutter();
-        this.traditionalCamera.getShutterOps().activateShutter();
-        this.traditionalCamera.getShutterOps().releaseShutter();
+        traditionalCamera.getShutterOps().setShutterSpeedSetting(shutterSpeed);
+        traditionalCamera.getShutterOps().initializeShutter();
+        traditionalCamera.getShutterOps().activateShutter();
+        traditionalCamera.getShutterOps().releaseShutter();
 
-        this.traditionalCamera.getMirrorOps().closeMirror();
+        traditionalCamera.getMirrorOps().closeMirror();
+
+        memoryCard.storeMemory();
 
         Logger.getInstance().log(getName() + " is done taking this photograph");
     }

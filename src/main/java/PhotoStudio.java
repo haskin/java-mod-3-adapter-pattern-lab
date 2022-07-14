@@ -6,6 +6,6 @@ public class PhotoStudio {
 
     public static void main(String[] args) {
 //        new Photographer(CameraFactory.CameraManufacturer.CANON_FILM).takePhotograph(50.0);
-        new Photographer(CameraFactory.CameraManufacturer.NIKON_FILM).takeDigitalPhotograph(100.0);
+        new Photographer(CameraFactory.CameraManufacturer.CANON_FILM).takeDigitalPhotograph(100.0);
     }
 }

@@ -10,26 +10,28 @@ public class CanonDigitalCamera implements DigitalCameraAdapter {
 //    Our photographer will now have a traditional camera as well as a digital camera
 
     private final Camera traditionalCamera;
+    private final MemoryCard memoryCard;
 
-    public CanonDigitalCamera(Camera camera) {
+    public CanonDigitalCamera(Camera camera, MemoryCard memoryCard) {
         this.traditionalCamera = camera;
+        this.memoryCard = memoryCard;
     }
 
     public void takePhotograph(double shutterSpeed) {
         Logger.getInstance().log(getName() + " is taking a photograph");
 
-        this.traditionalCamera.getFilmOps().engageFilmMechanism();
-        this.traditionalCamera.getFilmOps().rollFilm();
-        this.traditionalCamera.getFilmOps().releaseFilmMechanism();
+        memoryCard.accessMemory();
 
-        this.traditionalCamera.getMirrorOps().openMirror();
+        traditionalCamera.getMirrorOps().openMirror();
 
-        this.traditionalCamera.getShutterOps().setShutterSpeedSetting(shutterSpeed);
-        this.traditionalCamera.getShutterOps().initializeShutter();
-        this.traditionalCamera.getShutterOps().activateShutter();
-        this.traditionalCamera.getShutterOps().releaseShutter();
+        traditionalCamera.getShutterOps().setShutterSpeedSetting(shutterSpeed);
+        traditionalCamera.getShutterOps().initializeShutter();
+        traditionalCamera.getShutterOps().activateShutter();
+        traditionalCamera.getShutterOps().releaseShutter();
 
-        this.traditionalCamera.getMirrorOps().closeMirror();
+        traditionalCamera.getMirrorOps().closeMirror();
+
+        memoryCard.storeMemory();
 
         Logger.getInstance().log(getName() + " is done taking this photograph");
     }
